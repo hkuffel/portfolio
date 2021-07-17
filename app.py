@@ -78,7 +78,7 @@ def contact():
         msg = Message(
             "Someone filled out the contact form on kuffel.dev",
             sender=os.environ['MAIL_USERNAME'],
-            recipients=os.environ['MAIL_RECIPIENT']
+            recipients=[os.environ['MAIL_RECIPIENT']]
         )
         msg.body = f"From: {form.name.data} <{form.email.data}>\n\n{form.message.data}"
         mail.send(msg)
