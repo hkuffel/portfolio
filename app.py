@@ -23,10 +23,11 @@ app.config.update(mail_settings)
 mail = Mail(app)
 
 assets = Environment(app)
-dirname = os.getcwd()
 
 # TAILWIND CONFIG
-assets.config['postcss_bin'] = f'{dirname}/node_modules/postcss-cli/bin/postcss'
+if os.environ['FLASK_ENV'] != 'production':
+    dirname = os.getcwd()
+    assets.config['postcss_bin'] = f'{dirname}/node_modules/postcss-cli/bin/postcss'
 css = Bundle("src/main.css", output="dist/main.css", filters="postcss")
 assets.register("css", css)
 css.build()
