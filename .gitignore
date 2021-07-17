@@ -1,0 +1,5 @@
+static/dist/
+static/.webassets-cache/
+venv
+.env
+.DS_Store
