@@ -10,7 +10,7 @@ from wtforms.validators import DataRequired, Length, Email
 app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
 
-mail_settings = {
+mail_settings: dict = {
     "MAIL_SERVER": 'smtp.gmail.com',
     "MAIL_PORT": 465,
     "MAIL_USE_TLS": False,
@@ -26,9 +26,9 @@ assets = Environment(app)
 
 # TAILWIND CONFIG
 if os.environ['FLASK_ENV'] != 'production':
-    dirname = os.getcwd()
-    assets.config['postcss_bin'] = f'{dirname}/node_modules/postcss-cli/bin/postcss'
-css = Bundle("src/main.css", output="dist/main.css", filters="postcss")
+    dirname: str = os.getcwd()
+    assets.config['postcss_bin']: str = f'{dirname}/node_modules/postcss-cli/bin/postcss'
+css: Bundle = Bundle("src/main.css", output="dist/main.css", filters="postcss")
 assets.register("css", css)
 css.build()
 
@@ -58,7 +58,7 @@ class ContactForm(FlaskForm):
 
 @app.route("/")
 def homepage():
-    form = ContactForm()
+    form: ContactForm = ContactForm()
     return render_template("index.html", form=form)
 
 
